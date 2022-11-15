@@ -25,3 +25,52 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Configure Jest
+
+Remove any reference to Jasmine/Karma in the package.json
+
+```npm
+npm remove @types/jasmine jasmine-core karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter
+```
+
+Install Jest
+
+```npm
+npm i --save-dev jest jest-preset-angular @types/jest
+```
+
+Create the setup-jest.ts in the proyect folder in the next content.
+
+```js
+import "jest-preset-angular/setup-jest";
+```
+
+Add to package json
+
+```json
+"jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": [
+      "<rootDir>/setup-jest.ts"
+    ],
+    "globalSetup": "jest-preset-angular/global-setup"
+  }
+```
+
+Configure JEST in tsconfig.json and tsconfig.spec.json
+
+```json
+    "types": ["jest"]
+```
+
+Configure the comands to execute the test in the package.json
+
+```json
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+```
+
+Remover karma.conf.js and the file test.ts
+
+##
